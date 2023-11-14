@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <string.h>
+
+// Define the maximum number of employees
+#define MAX_EMPLOYEES 100
+
+// Define the structure for an employee
+typedef struct {
+    int employeeID;
+    char name[50];
+    char position[50];
+    float salary;
+} Employee;
+
+int main() {
+    // Array to store employee records
+    Employee employees[MAX_EMPLOYEES];
+    int employeeCount = 0;
+
+    // Function to add a new employee
+    void addEmployee(int id, const char* empName, const char* empPosition, float empSalary) {
+        if (employeeCount < MAX_EMPLOYEES) {
+            employees[employeeCount].employeeID = id;
+            strcpy(employees[employeeCount].name, empName);
+            strcpy(employees[employeeCount].position, empPosition);
+            employees[employeeCount].salary = empSalary;
+            employeeCount++;
+        }
+    }
+
+    // Function to display all employee records
+    void displayEmployees() {
+        printf("Employee Records:\n");
+        for (int i = 0; i < employeeCount; i++) {
+            printf("ID: %d, Name: %s, Position: %s, Salary: %.2f\n", employees[i].employeeID, employees[i].name, employees[i].position, employees[i].salary);
+        }
+    }
+
+    // Function to calculate total payroll
+    float calculatePayroll() {
+        float totalPayroll = 0;
+        for (int i = 0; i < employeeCount; i++) {
+            totalPayroll += employees[i].salary;
+        }
+        return totalPayroll;
+    }
+
+    // Adding sample employees
+    addEmployee(1, "Alice", "Manager", 5000);
+    addEmployee(2, "Bob", "Developer", 4000);
+    addEmployee(3, "Charlie", "Analyst", 3500);
+
+    // Displaying all employee records
+    displayEmployees();
+
+    // Calculating total payroll
+    float totalPayroll = calculatePayroll();
+    printf("Total Payroll: $%.2f\n", totalPayroll);
+
+    return 0;
+}
